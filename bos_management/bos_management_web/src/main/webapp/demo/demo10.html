@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ajax创建ztree</title>
+<!--  vue.js -->
+<link rel="stylesheet" type="text/css"
+	href="../js/easyui/themes/default/easyui.css">
+
+<link rel="stylesheet" type="text/css"
+	href="../js/easyui/themes/icon.css">
+<script type="text/javascript" src="../js/jquery-1.8.3.js"></script>
+<script type="text/javascript" src="../js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript">
+
+function show() {
+	//info,error,questionwarning
+	// $.messager.alert('我的消息','这是一个简单的show弹框','warning');
+	
+	 /* $.messager.confirm({
+		title: '我的消息',
+		msg: '确定要提交吗',
+		fn: function(r){
+			if (r){
+				alert('confirmed: '+r);
+			}
+		}
+	}); */
+	
+	$.messager.show({
+		title:'我的消息',
+		msg:'消息将在5秒钟之后关闭',
+		timeout:5000,
+		//null,slide,fade,show. Defaults to slide.
+		showType:'fade'
+	});
+	
+}   
+
+
+</script>
+</head>
+<body >
+
+<!--
+iconCls:'icon-undo'图标样式
+class="menu-sep"分割线
+  -->
+
+<a href="javascript:void(0)" id="mb" class="easyui-menubutton" onclick="show()"
+		data-options="menu:'#mm',iconCls:'icon-edit'">Edit</a>
+	
+
+</body>
+</html>

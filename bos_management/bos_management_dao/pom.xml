@@ -6,4 +6,12 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>bos_management_dao</artifactId>
+ 
+  <dependencies>
+  	<dependency>
+  		<groupId>com.huying</groupId>
+  		<artifactId>bos_management_domain</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
 </project>

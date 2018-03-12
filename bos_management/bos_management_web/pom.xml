@@ -7,4 +7,11 @@
   </parent>
   <artifactId>bos_management_web</artifactId>
   <packaging>war</packaging>
+  <dependencies>
+  	<dependency>
+  		<groupId>com.huying</groupId>
+  		<artifactId>bos_management_service</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
 </project>

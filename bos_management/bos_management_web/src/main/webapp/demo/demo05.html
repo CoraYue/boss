@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Basic DataGrid - jQuery EasyUI Demo</title>
+<link rel="stylesheet" type="text/css" href="../js/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="../js/easyui/themes/icon.css">
+<script type="text/javascript" src="../js/jquery-1.8.3.js"></script>
+<script type="text/javascript" src="../js/easyui/jquery.easyui.min.js"></script>
+
+<script type="text/javascript">
+function addTabs() {
+	//判断要添加的选项卡是否存在
+	var result = $('#tt').tabs("exists","新选项卡")
+     
+	if (result) {
+		//如果有，就选中这个选项卡
+		$('#tt').tabs("select","新选项卡")
+	}else{
+		//没有，就添加一个新的选项卡
+		$('#tt').tabs('add', {
+			title : '新选项卡',
+			selected : true
+		
+		});
+		
+	}
+}
+</script>
+</head>
+<body class="easyui-layout">
+	<!--添加选项卡  -->
+
+	<!--  
+	给节点指定class就可以使用EasyUI提供的控件
+	data-options:指定控件的属性
+	fit:true:设置为true将手风琴容器大小设置为父容器。
+	-->
+	<div data-options="region:'north'" style="height: 50px"></div>
+	<div data-options="region:'west'" title="West" style="width: 200px;">
+
+		<div class="easyui-accordion" data-options="fit:true">
+			<div title="面板一">
+				<a id="btn" href="#" class="easyui-linkbutton" onclick="addTabs()"
+					data-options="iconCls:'icon-search'">添加选项卡</a>
+			</div>
+
+			<div title="面板二">面板二</div>
+			<div title="面板三">面板三</div>
+		</div>
+
+	</div>
+	<div
+		data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
+		<div id="tt" class="easyui-tabs" data-options="fit:true">
+			<div title="选项卡1">选项卡1</div>
+			<div title="选项卡2">选项卡2</div>
+			<div title="选项卡3">选项卡3</div>
+		</div>
+
+	</div>
+</body>
+</html>
