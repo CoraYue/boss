@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>静态页面生成DataGrid</title>
+	<link rel="stylesheet" type="text/css" href="../js/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../js/easyui/themes/icon.css">
+	<script type="text/javascript" src="../js/jquery-1.8.3.js"></script>
+	<script type="text/javascript" src="../js/easyui/jquery.easyui.min.js"></script>
+	
+	<script type="text/javascript">
+    $(function() {
+
+        $("#id_table").datagrid({
+            // 定义表头列,重点属性       
+            columns: [[{
+                checkbox: true,
+                id: 'cbs',
+                title: '编号',
+                field: 'cbs'
+            }, {
+                field: 'id',
+                title: 'ID',
+                id: 'id'
+            }, {
+                field: 'name',
+                title: '姓名',
+                id: 'name'
+            }, {
+                field: 'age',
+                title: '年龄',
+                id: 'age'
+            }, ]],
+            // 定义请求地址,重点属性          
+            url: '../data/datagrid.json',
+            // 是否显示行号
+            rownumbers: true,
+            // 是否单选
+            singleSelect: true,
+            // 指定工具栏,重点属性
+            toolbar: [{
+                iconCls: 'icon-edit',
+                text: '编辑',
+                handler: function() {
+                    alert('编辑按钮')
+                }
+            }, "-", {
+                iconCls: 'icon-help',
+                text: '帮助',
+                // 指定点击菜单时的响应函数
+                handler: function() {
+                    alert('帮助按钮')
+                }
+            }],
+            // 是否显示分页工具条,重点属性       
+            pagination: true,
+            // 是否显示斑马线
+            striped:true
+
+        })
+    })
+</script>
+	
+</head>
+<body>
+<table id="id_table" class="easyui-datagrid" >
+    <thead>
+        <tr>
+            <th data-options="field:'id'">Id</th>
+            <th data-options="field:'name'">Name</th>
+            <th data-options="field:'age'">Age</th>
+            
+        </tr>
+    </thead>
+    <tbody >
+        
+    </tbody>
+</table>
+
+</body>
+</html>
