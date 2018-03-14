@@ -23,6 +23,11 @@
 			function doEdit(){
 				alert("修改...");
 			}
+			function doSearch() {
+				
+				$("#searchWindow").window("open");
+				
+			}
 			
 			function doDelete(){
 				
@@ -71,7 +76,16 @@
 				text : '还原',
 				iconCls : 'icon-save',
 				handler : doRestore
+			},{
+				id : 'button-search',
+				text : '搜索',
+				iconCls : 'icon-search',
+				handler : doSearch
 			}];
+			
+			
+			
+			
 			// 定义列
 			var columns = [ [ {
 				field : 'id',
@@ -177,6 +191,8 @@
 			        resizable:false
 			    });
 				
+				
+				
 			});
 		
 			function doDblClickRow(){
@@ -190,6 +206,38 @@
 			}
 			
 		}
+		
+		
+		</script>
+		<script type="text/javascript">
+		
+			$.fn.serializeJson = function() {
+				var serializeObj = {};
+				var array = this.serializeArray();
+				var str = this.serialize();
+				$(array).each(function() {
+					if(serializeObj[this.name]) {
+						if($.isArray(serializeObj[this.name])) {
+							serializeObj[this.name].push(this.value);
+						} else {
+							serializeObj[this.name] = [serializeObj[this.name], this.value];
+						}
+					} else {
+						serializeObj[this.name] = this.value;
+					}
+				});
+				return serializeObj;
+			};
+			// 用户点击查询弹出框中的查询按钮,对应的点击事件
+			function realSearch() {
+				// 将用户输入的查询条件key/value拼装成json字符串
+				var json = $("#searchForm").serializeJson()
+				// 调用datagrid的重新加载数据方法,再次进行查询
+				$("#grid").datagrid("load", json)
+				// 关闭查询弹出框
+				$("#searchWindow").window("close")
+			}
+		
 		</script>
 	</head>
 
@@ -271,7 +319,7 @@
 		<!-- 查询快递员-->
 		<div class="easyui-window" title="查询快递员窗口" closed="true" id="searchWindow" collapsible="false" minimizable="false" maximizable="false" style="width: 400px; top:40px;left:200px">
 			<div style="overflow:auto;padding:5px;" border="false">
-				<form id="searchForm">
+				<form id="searchForm" action="#" method="post">
 					<table class="table-edit" width="80%" align="center">
 						<tr class="title">
 							<td colspan="2">查询条件</td>
@@ -301,7 +349,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2"><a id="searchBtn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a> </td>
+							<td colspan="2"><a id="searchBtn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="realSearch()">查询</a> </td>
 						</tr>
 					</table>
 				</form>
