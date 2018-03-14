@@ -1,5 +1,6 @@
 package com.huying.bos.service.base.impl;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,6 +26,19 @@ public class CourierServiceImpl implements CourierService{
 	@Override
 	public Page<Courier> pageQuery(Pageable pageable) {
 		return  courierRepository.findAll(pageable);
+		
+	}
+
+	@Override
+	public void batchDel(String ids) {
+		//为空判断
+		if(StringUtils.isNotEmpty(ids)) {
+			//切割数据
+			String[] split = ids.split(",");
+			for (String id : split) {
+				courierRepository.updateDelTagById(Long.parseLong(id));
+			}
+		}
 		
 	}
 

@@ -88,5 +88,18 @@ public class CourierAction extends ActionSupport implements ModelDriven<Courier>
 		response.getWriter().write(json);
 		return NONE;
 	}
+	
+	private String ids;
+	public void setIds(String ids) {
+		this.ids = ids;
+	}
+	
+	//作废快递员
+	@Action(value="courierAction_batchDel",results= {
+			@Result(name="success",location="/pages/base/courier.html",type="redirect")})
+	public String batchDel() {
+		courierService.batchDel(ids);
+		return SUCCESS;
+	}
 
 }

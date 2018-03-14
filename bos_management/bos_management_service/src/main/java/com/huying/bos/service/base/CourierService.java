@@ -11,4 +11,6 @@ public interface CourierService {
 
 	Page<Courier> pageQuery(Pageable pageable);
 
+	void batchDel(String ids);
+
 }
