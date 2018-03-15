@@ -207,10 +207,6 @@
 			
 		}
 		
-		
-		</script>
-		<script type="text/javascript">
-		
 			$.fn.serializeJson = function() {
 				var serializeObj = {};
 				var array = this.serializeArray();
@@ -317,9 +313,9 @@
 		</div>
 		
 		<!-- 查询快递员-->
-		<div class="easyui-window" title="查询快递员窗口" closed="true" id="searchWindow" collapsible="false" minimizable="false" maximizable="false" style="width: 400px; top:40px;left:200px">
+		<div class="easyui-window" title="查询快递员窗口" closed="true" modal="true" id="searchWindow" collapsible="false" minimizable="false" maximizable="false" style="width: 400px; top:40px;left:200px">
 			<div style="overflow:auto;padding:5px;" border="false">
-				<form id="searchForm" action="#" method="post">
+				<form id="searchForm" >
 					<table class="table-edit" width="80%" align="center">
 						<tr class="title">
 							<td colspan="2">查询条件</td>
