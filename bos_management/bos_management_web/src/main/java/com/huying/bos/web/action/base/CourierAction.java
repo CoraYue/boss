@@ -103,7 +103,7 @@ public class CourierAction extends ActionSupport implements ModelDriven<Courier>
 				if (standard != null) {
 					String name = standard.getName();
 					if (StringUtils.isNotEmpty(name)) {
-						Join<Object, Object> join = root.join("standrd");
+						Join<Object, Object> join = root.join("standard");
 						Predicate p4 = cb.equal(join.get("name").as(String.class), name);
 						list.add(p4);
 					}

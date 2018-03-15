@@ -329,7 +329,10 @@
 						<tr>
 							<td>收派标准</td>
 							<td>
-								<input type="text" name="standard.name" />
+								<input type="text" name="standard.name" 
+										class="easyui-combobox" 
+										data-options="required:true,valueField:'name',textField:'name',
+											url:'../../standardAction_findAll.action'"/>
 							</td>
 						</tr>
 						<tr>

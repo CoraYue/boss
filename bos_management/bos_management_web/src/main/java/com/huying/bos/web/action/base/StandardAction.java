@@ -18,9 +18,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 
 import com.huying.bos.domain.base.Standard;
 import com.huying.bos.service.base.StandardService;
+import com.huying.bos.web.action.CommonAction;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -31,17 +33,17 @@ import net.sf.json.JSONObject;
 @ParentPackage("struts-default")
 @Scope("protortype")
 @Controller
-public class StandardAction extends ActionSupport implements ModelDriven<Standard> {
-	private Standard standard =new Standard();
+public class StandardAction extends CommonAction<Standard>{
+	
+
+	public StandardAction() {
+		super(Standard.class);
+	}
 
 	@Autowired
 	private StandardService standardService;
 
-	@Override
-	public Standard getModel() {
-		
-		return standard;
-	}
+	
 	
 	// 保存派送标准
     //Action中的value等价于以前struts.xml中<action>节点的name
@@ -49,18 +51,10 @@ public class StandardAction extends ActionSupport implements ModelDriven<Standar
     //Result中的location等价于以前struts.xml中<result>节点之间的内容
 	@Action(value="standardAction_save",results= {@Result(name="success",location="/pages/base/standard.html",type="redirect")})
 	public String save() {
-		standardService.save(standard);
+		standardService.save(getModel());
 		return SUCCESS;
 	}
 	
-	private int page;
-	private int rows;
-	public void setPage(int page) {
-		this.page = page;
-	}
-	public void setRows(int rows) {
-		this.rows = rows;
-	}
 	@Action("standardAction_pageQuery")
 	public String pageQuery() throws IOException {
 		
@@ -68,7 +62,11 @@ public class StandardAction extends ActionSupport implements ModelDriven<Standar
 		Pageable pageable=new PageRequest(page - 1, rows);
 		//进行分页查询
 		Page<Standard> page= standardService.pageQuery(pageable);
-		//获取总数据条数
+		
+		page2json(page,null);
+		
+		
+		/*//获取总数据条数
 		long totalElements = page.getTotalElements();
 		//获取当前页面要显示的数据
 		List<Standard> list = page.getContent();
@@ -84,7 +82,7 @@ public class StandardAction extends ActionSupport implements ModelDriven<Standar
 		
 		response.setContentType("application/json;charset=UTF-8");
 		//写出内容
-		response.getWriter().write(json);
+		response.getWriter().write(json);*/
 		return NONE;
 	}
 	
