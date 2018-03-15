@@ -14,6 +14,7 @@
 		<script type="text/javascript" src="../../js/easyui/ext/jquery.portal.js"></script>
 		<script type="text/javascript" src="../../js/easyui/ext/jquery.cookie.js"></script>
 		<script src="../../js/easyui/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
+		<script type="text/javascript" src="../../js/jquery.ocupload-1.1.2.js"></script>
 		<script type="text/javascript">
 			function doAdd(){
 				$('#addWindow').window("open");
@@ -103,6 +104,12 @@
 					columns : columns,
 					onDblClickRow : doDblClickRow
 				});
+				
+				$("#button-import").upload({
+					name:"file",
+					action:"../../areaAction_importXLS.action"
+					
+				})
 				
 				// 添加、修改区域窗口
 				$('#addWindow').window({
