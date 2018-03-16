@@ -35,7 +35,7 @@ public class Area {
     private String shortcode; // 简码
 
     @OneToMany(mappedBy = "area")
-    private Set<SubArea> subareas = new HashSet<SubArea>();
+    private transient Set<SubArea> subareas = new HashSet<SubArea>();
 
     public Long getId() {
         return id;
