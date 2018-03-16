@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -42,10 +43,10 @@ public class FixedArea {
     @Column(name = "C_OPERATING_COMPANY")
     private String operatingCompany; // 操作单位
 
-    @OneToMany(mappedBy = "fixedArea")
+    @OneToMany(mappedBy = "fixedArea" )
     private Set<SubArea> subareas = new HashSet<SubArea>(0);
 
-    @ManyToMany
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "T_FIXEDAREA_COURIER",
             joinColumns = {@JoinColumn(name = "C_FIXED_AREA_ID",
                     referencedColumnName = "C_ID")},

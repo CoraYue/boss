@@ -257,6 +257,12 @@
 				});
 				
 			}
+			
+			function submitData() {
+				  if($("#fixedAreaForm").form("validate")){
+				        $("#fixedAreaForm").submit()
+				    }
+			}
 		</script>
 	</head>
 
@@ -279,7 +285,7 @@
 		<div class="easyui-window" title="定区添加修改" id="addWindow" collapsible="false" minimizable="false" maximizable="false" style="top:20px;left:200px">
 			<div style="height:31px;overflow:hidden;" split="false" border="false">
 				<div class="datagrid-toolbar">
-					<a id="save" icon="icon-save" href="#" class="easyui-linkbutton" plain="true">保存</a>
+					<a id="save" icon="icon-save" href="#" class="easyui-linkbutton" plain="true" onclick="submitData()">保存</a>
 					</script>
 				</div>
 			</div>
