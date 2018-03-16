@@ -29,4 +29,10 @@ public class AreaServiceImpl implements AreaService {
 
 		return areaRepository.findAll(pageable);
 	}
+
+	@Override
+	public List<Area> finsByQ(String q) {
+		q="%"+q.toUpperCase()+"%";
+		return areaRepository.findByQ(q);
+	}
 }

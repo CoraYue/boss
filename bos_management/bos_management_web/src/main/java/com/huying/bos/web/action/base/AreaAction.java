@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
@@ -33,6 +34,7 @@ import com.huying.utils.PinYin4jUtils;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 
@@ -168,5 +170,43 @@ public class AreaAction extends CommonAction<Area> {
 		*/
 		return NONE;
 	}
+	
+	private String q;
+	public void setQ(String q) {
+		this.q = q;
+	}
+	
+	/**
+	 * 增加分区里面的区域下拉框查找
+	 * @return
+	 * @throws IOException 
+	 */
+	@Action("areaAction_findAll")
+	public String findAll() throws IOException {
+		List<Area> list;
+		if (StringUtils.isNotEmpty(q)) {
+			//按条件查询
+			list=areaService.finsByQ(q);
+		}else {
+			//查询所有
+			Page<Area> page=areaService.pageQuery(null);
+			list = page.getContent();
+			
+		}
+		
+		
+		// 忽略字段
+			JsonConfig config = new JsonConfig();
+			config.setExcludes(new String[] { "subareas" });
+			
+			list2json(list, config);
+			 
+			
+			
+		return NONE;
+	}
+	
+	
+	
 
 }

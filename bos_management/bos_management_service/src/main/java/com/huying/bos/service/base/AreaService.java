@@ -13,4 +13,6 @@ public interface AreaService {
 
 	Page<Area> pageQuery(Pageable pageable);
 
+	List<Area> finsByQ(String q);
+
 }

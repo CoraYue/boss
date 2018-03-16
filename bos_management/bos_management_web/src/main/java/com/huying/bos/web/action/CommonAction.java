@@ -14,6 +14,7 @@ import com.huying.bos.domain.base.Area;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 
@@ -75,6 +76,25 @@ public class CommonAction<T> extends ActionSupport implements ModelDriven<T> {
 				response.getWriter().write(json);
 				
 		
+	}
+	
+	//把list集合转换成json
+	public void list2json(List<T> list , JsonConfig config) throws IOException {
+		String json;
+		
+		if (config!=null) {
+			json = JSONArray.fromObject(list,config).toString();
+			
+		}else {
+			
+			json = JSONArray.fromObject(list).toString();
+		}
+		// 设置输出内容类型
+		HttpServletResponse response = ServletActionContext.getResponse();
+
+		response.setContentType("application/json;charset=UTF-8");
+		// 写出内容
+		response.getWriter().write(json);
 	}
 
 }

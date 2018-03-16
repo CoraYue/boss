@@ -100,6 +100,9 @@ public class Area {
     public void setSubareas(Set<SubArea> subareas) {
         this.subareas = subareas;
     }
+    public String getName() {
+    	return province+city+district;
+    }
 
     @Override
     public String toString() {
