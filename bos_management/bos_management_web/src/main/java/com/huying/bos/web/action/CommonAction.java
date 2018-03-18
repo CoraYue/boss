@@ -79,7 +79,7 @@ public class CommonAction<T> extends ActionSupport implements ModelDriven<T> {
 	}
 	
 	//把list集合转换成json
-	public void list2json(List<T> list , JsonConfig config) throws IOException {
+	public void list2json(List list , JsonConfig config) throws IOException {
 		String json;
 		
 		if (config!=null) {

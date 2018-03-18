@@ -22,4 +22,14 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		return customerRepository.findAll();
 	}
+
+	@Override
+	public List<Customer> findCustomersUnAssociated() {
+		return customerRepository.findByFixedAreaIdIsNull();
+	}
+
+	@Override
+	public List<Customer> findCustomersAssociated(String fixedAreaId) {
+		return customerRepository.findByFixedAreaId(fixedAreaId);
+	}
 }

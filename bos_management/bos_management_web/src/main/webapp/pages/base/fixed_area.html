@@ -35,6 +35,51 @@
 				$('#customerWindow').window('open');
 			}
 			
+			//关联客户
+			function doCustomerAssociations(){
+				var rows = $("#grid").datagrid('getSelections');
+				if (rows.length == 1) {
+				$('#customerWindow').window('open');
+				
+				//清空数据,避免数据重复添加
+				$("#noassociationSelect").html("")
+				$("#associationSelect").html("")
+				
+					//查询未关联的客户
+					$.post("../../fixedAreaAction_findUnAssociatedCustomers.action",function(data){
+						for (var i = 0; i < data.length; i++) {
+							
+						
+						var id=data[i].id;
+						var username=data[i].username;
+						var telephone=data[i].telephone;
+					
+								$("#noassociationSelect").append("<option value='"+id+"'>"+username+"["+telephone+"]</option>")
+						}
+						})
+						//获取当前被选中定区id
+						var id=rows[0].id
+						
+						//查询已关联的客户
+					$.post("../../fixedAreaAction_findAssociatedCustomers.action","id="+id,function(data){
+						for (var i = 0; i < data.length; i++) {
+							
+						
+						var id=data[i].id;
+						var username=data[i].username;
+						var telephone=data[i].telephone;
+					
+								$("#associationSelect").append("<option value='"+id+"'>"+username+"["+telephone+"]</option>")
+						}
+						})
+						
+						
+						
+				}else{
+					$.messager.alert("提示","您只能选择一条数据进行操作","info");
+				}
+			}
+			
 			//工具栏
 			var toolbar = [ {
 				id : 'button-search',	
@@ -60,7 +105,7 @@
 				id : 'button-association',
 				text : '关联客户',
 				iconCls : 'icon-sum',
-				handler : doAssociations
+				handler : doCustomerAssociations
 			},{
 				id : 'button-association-courier',
 				text : '关联快递员',
@@ -68,6 +113,7 @@
 				handler : function(){
 					// 判断是否已经选中了一个定区，弹出关联快递员窗口 
 					var rows = $("#grid").datagrid('getSelections');
+				
 					if(rows.length==1){
 						// 只选择了一个定区
 						// 弹出定区关联快递员 窗口 
