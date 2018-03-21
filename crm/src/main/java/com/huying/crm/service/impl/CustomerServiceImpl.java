@@ -61,4 +61,10 @@ public class CustomerServiceImpl implements CustomerService {
 	public void save(Customer customer) {
 		customerRepository.save(customer);		
 	}
+
+	//激活用户
+	@Override
+	public void active(String telephone) {
+		customerRepository.active(telephone);	
+	}
 }

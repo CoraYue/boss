@@ -32,4 +32,8 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 		@Modifying
 		@Query("update Customer set fixedAreaId = null where id = ?")
 		void unBindFixedAreaById(Long unCustomerId);
+
+		
+		@Query("update Customer set type=1 where telephone = ?")
+		void active(String telephone);
 }
