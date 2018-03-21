@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -20,15 +22,29 @@ public interface CustomerService {
 	@GET
 	@Path("/findAll")
 	List<Customer> findAll();
-	
+
 	/**
 	 * 查找未关联区的客户
 	 */
 	@GET
 	@Path("findCustomersUnAssociated")
 	List<Customer> findCustomersUnAssociated();
-	
+
 	@GET
 	@Path("findCustomersAssociated")
-	List<Customer> findCustomersAssociated(@QueryParam("fixedAreaId")String fixedAreaId);
+	List<Customer> findCustomersAssociated(@QueryParam("fixedAreaId") String fixedAreaId);
+
+	@PUT
+	@Path("/assignCustomers2FixedArea")
+	void assignCustomers2FixedArea(@QueryParam("fixedAreaId") String fixedAreaId,
+			@QueryParam("customerIds") Long[] customerIds);
+
+	@PUT
+	@Path("/assignCustomers2FixedArea2")
+	void assignCustomers2FixedArea2(@QueryParam("uncustomerIds") Long[] uncustomerIds);
+
+	// 注册
+  @POST
+  @Path("/save")
+  void save(Customer customer);
 }

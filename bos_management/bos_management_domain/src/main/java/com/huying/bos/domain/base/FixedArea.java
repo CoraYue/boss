@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -25,6 +26,7 @@ public class FixedArea {
 
     @Id
     @Column(name = "C_ID")
+    @GeneratedValue
     private Long id; // 主键
     @Column(name = "C_FIXED_AREA_NAME", unique = true)
     private String fixedAreaName; // 定区名称
@@ -46,7 +48,7 @@ public class FixedArea {
     @OneToMany(mappedBy = "fixedArea" )
     private Set<SubArea> subareas = new HashSet<SubArea>(0);
 
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name = "T_FIXEDAREA_COURIER",
             joinColumns = {@JoinColumn(name = "C_FIXED_AREA_ID",
                     referencedColumnName = "C_ID")},

@@ -56,7 +56,7 @@ public class FixedAreaAction extends CommonAction<FixedArea> {
 
 		// 忽略字段
 		JsonConfig config = new JsonConfig();
-		config.setExcludes(new String[] { "subareas" });
+		config.setExcludes(new String[] { "subareas","couriers" });
 		page2json(page, config);
 		return NONE;
 
@@ -81,5 +81,59 @@ public class FixedAreaAction extends CommonAction<FixedArea> {
 				.getCollection(Customer.class);
 		list2json(list, null);
 		return NONE;
+	}
+	
+	private Long[] customerIds;
+	public void setCustomerIds(Long[] customerIds) {
+		this.customerIds = customerIds;
+	}
+	private Long[] uncustomerIds;
+	public void setUncustomerIds(Long[] uncustomerIds) {
+		this.uncustomerIds = uncustomerIds;
+	}
+	
+	//关联客户
+	@Action(value = "fixedAreaAction_assignCustomers2FixedArea", results = {
+			@Result(name = "success", location = "/pages/base/fixed_area.html", type = "redirect") })
+ 
+	public String assignCustomers2FixedArea() throws IOException {
+		if(customerIds!=null) {
+		WebClient
+				.create("http://localhost:8180/crm/webService/customerService/assignCustomers2FixedArea")
+				.type(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON)
+				.query("fixedAreaId", getModel().getId())
+				.query("customerIds", customerIds)
+				.put(null);
+		}
+		if(uncustomerIds!=null) {
+			WebClient
+			.create("http://localhost:8180/crm/webService/customerService/assignCustomers2FixedArea2")
+			.type(MediaType.APPLICATION_JSON)
+			.accept(MediaType.APPLICATION_JSON)
+			.query("uncustomerIds", uncustomerIds)
+			
+			.put(null);
+		}
+		return SUCCESS;
+	}
+	
+   //接收页面传过来的参数
+	private Long courierId;
+	private Long takeTimeId;
+	public void setCourierId(Long courierId) {
+		this.courierId = courierId;
+	}
+	public void setTakeTimeId(Long takeTimeId) {
+		this.takeTimeId = takeTimeId;
+	}
+	
+	
+	//关联快递员
+	@Action(value = "fixedAreaAction_associationCourierToFixedArea",results = {
+			@Result(name = "success", location = "/pages/base/fixed_area.html", type = "redirect") })
+	public String associationCourierToFixedArea() throws IOException {
+		fixedAreaService.associationCourierToFixedArea(getModel().getId(),courierId,takeTimeId);
+		return SUCCESS;
 	}
 }

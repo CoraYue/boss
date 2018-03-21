@@ -11,4 +11,8 @@ public interface FixedAreaService {
 
 	Page<FixedArea> pageQuery(Pageable pageable);
 
+	void associationCourierToFixedArea(Long fixedAreaId, Long courierId, Long takeTimeId);
+
+
+
 }
