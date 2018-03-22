@@ -173,6 +173,7 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 
 		    	 }else {
 		    		 //用户已注册但是没有激活
+		    		 ServletActionContext.getRequest().getSession().setAttribute("msg", "您还没有激活");
 		    		 return "unactived";
 		    	 }
 		     }

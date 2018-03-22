@@ -13,6 +13,8 @@ public interface FixedAreaService {
 
 	void associationCourierToFixedArea(Long fixedAreaId, Long courierId, Long takeTimeId);
 
+	void assignSubAreas2FixedArea(Long fixedAreaId, Long[] subAreaIds);
+
 
 
 }

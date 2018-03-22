@@ -117,6 +117,23 @@ public class FixedAreaAction extends CommonAction<FixedArea> {
 		}
 		return SUCCESS;
 	}
+	//使用属性驱动获取分区id
+	private Long[] subAreaIds;
+	public void setSubAreaIds(Long[] subAreaIds) {
+		this.subAreaIds = subAreaIds;
+	}
+	
+	 // 关联分区
+    @Action(value = "fixedAreaAction_assignSubAreas2FixedArea",
+            results = {@Result(name = "success",
+                    location = "/pages/base/fixed_area.html",
+                    type = "redirect")})
+    public String assignSubAreas2FixedArea() throws IOException {
+        fixedAreaService.assignSubAreas2FixedArea(getModel().getId(),
+                subAreaIds);
+
+        return SUCCESS;
+    }
 	
    //接收页面传过来的参数
 	private Long courierId;
