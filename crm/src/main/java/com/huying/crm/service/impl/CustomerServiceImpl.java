@@ -67,4 +67,16 @@ public class CustomerServiceImpl implements CustomerService {
 	public void active(String telephone) {
 		customerRepository.active(telephone);	
 	}
+
+	//校验用户是否激活
+	@Override
+	public Customer isActived(String telephone) {
+		return customerRepository.findByTelephone(telephone);
+	}
+
+	//登录
+	@Override
+	public Customer login(String telephone, String password) {
+		return customerRepository.findByTelephoneAndPassword(telephone,password);
+	}
 }
