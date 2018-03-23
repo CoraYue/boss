@@ -55,7 +55,7 @@ public class SubAreaAction extends CommonAction<SubArea>{
 		
 		// 忽略字段
 				JsonConfig config = new JsonConfig();
-				config.setExcludes(new String[] {"fixedArea" });
+				config.setExcludes(new String[] {"subareas","couriers"});
 		page2json(page, config);
 		return NONE;
 		

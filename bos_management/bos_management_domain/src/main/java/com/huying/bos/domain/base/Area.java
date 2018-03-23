@@ -35,19 +35,7 @@ public class Area {
     private String shortcode; // 简码
 
     @OneToMany(mappedBy = "area")
-    private transient Set<SubArea> subareas = new HashSet<SubArea>();
-
-   
-
-
-	public Area() {
-	}
-
-	public Area(String province, String city, String district) {
-		this.province = province;
-		this.city = city;
-		this.district = district;
-	}
+    private  Set<SubArea> subareas = new HashSet<SubArea>();
 
 	public Long getId() {
         return id;

@@ -460,9 +460,9 @@
 								<select id="noassociationSelect" name="uncustomerIds" multiple="multiple" size="10"></select>
 							</td>
 							<td>
-								<input type="button" value="》》" id="toRight" onclick="move2right()">
+								<input type="button" value="》》" id="toRight" onclick="moveCustomer2right()">
 								<br/>
-								<input type="button" value="《《" id="toLeft" onclick="move2left()">
+								<input type="button" value="《《" id="toLeft" onclick="moveCustomer2left()">
 							</td>
 							<td>
 								<select id="associationSelect" name="customerIds" multiple="multiple" size="10"></select>
@@ -476,12 +476,12 @@
 			</div>
 		</div>
 		<script type="text/javascript">
-		function move2right() {
+		function moveCustomer2right() {
 			$("#associationSelect").append(
 					$("#noassociationSelect option:selected"))
 
 		}
-		function move2left() {
+		function moveCustomer2left() {
 			$("#noassociationSelect").append(
 					$("#associationSelect option:selected"))
 
