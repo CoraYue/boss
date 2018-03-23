@@ -79,4 +79,11 @@ public class CustomerServiceImpl implements CustomerService {
 	public Customer login(String telephone, String password) {
 		return customerRepository.findByTelephoneAndPassword(telephone,password);
 	}
+
+	//校验手机号
+	@Override
+	public Customer findByTelephone(String telephone) {
+		
+		return customerRepository.findByTelephone(telephone);
+	}
 }

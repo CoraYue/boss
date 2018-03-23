@@ -1,7 +1,10 @@
 package com.huying.bos.fore.web.action;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.concurrent.TimeUnit;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -40,6 +43,8 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 		}
 		return model;
 	}
+	
+
 
 	//发送验证码
 	@Action(value="customerAction_sendSMS")
@@ -181,6 +186,26 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 		 }
 		 
 		 return  ERROR;
+	 }
+	 
+	 @Action("customerAction_checkTelephone")
+	 public  String checkTelephone() throws IOException {
+		 
+		 Customer customer = WebClient.create(
+                 "http://localhost:8180/crm/webService/customerService/findByTelephone")
+                 .type(MediaType.APPLICATION_JSON)
+                 .query("telephone", getModel().getTelephone())
+                 .accept(MediaType.APPLICATION_JSON)
+                 .get(Customer.class);
+		 
+		 PrintWriter writer = ServletActionContext.getResponse().getWriter();
+
+		 if(customer!=null) {
+			 writer.write("true");
+		 }else {
+			 writer.write("false");
+		 }
+		 return NONE;
 	 }
 	
 }

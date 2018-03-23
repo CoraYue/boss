@@ -14,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.data.jpa.repository.Query;
 
 import com.huying.crm.domain.Customer;
+import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
 
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
@@ -62,4 +63,9 @@ public interface CustomerService {
   @GET
   @Path("/login")
   Customer login(@QueryParam("telephone")String telephone , @QueryParam("password")String password);
+  
+  //校验手机号
+  @GET
+  @Path("/findByTelephone")
+  Customer findByTelephone(@QueryParam("telephone") String telephone);
 }

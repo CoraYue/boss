@@ -15,5 +15,10 @@
   		<artifactId>huyingUtils</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
+  	<dependency>
+  		<groupId>com.huying</groupId>
+  		<artifactId>bos_management_domain</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
   </dependencies>
 </project>
