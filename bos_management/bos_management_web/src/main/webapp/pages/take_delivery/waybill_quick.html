@@ -76,7 +76,7 @@
 					}
 				}
 			}, {
-				field : 'arrivecity',
+				field : 'arriveCity',
 				title : '到达地',
 				width : 120,
 				align : 'center',
@@ -87,7 +87,7 @@
 					}
 				}
 			},{
-				field : 'product',
+				field : 'goodsType',
 				title : '产品',
 				width : 120,
 				align : 'center',
@@ -146,13 +146,21 @@
 					pageList: [30,50,100],
 					pagination : true,
 					toolbar : toolbar,
-					url :  "",
+					url :  "../../waybillAction_pageQuery.action",
 					idField : 'id',
 					columns : columns,
 					onDblClickRow : doDblClickRow,
 					onAfterEdit : function(rowIndex, rowData, changes){
 						console.info(rowData);
 						editIndex = undefined;
+						//提交数据到数据库
+						$.post("../../waybillAction_save.action",rowData,function(data){
+							
+							//如果录入失败，给出提示
+							if (data == '0') {
+								$.messager.alert('警告','录入失败，请检查数据')
+							}
+						})
 					}
 				});
 			});
