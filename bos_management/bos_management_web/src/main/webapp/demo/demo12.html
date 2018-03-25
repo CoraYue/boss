@@ -10,8 +10,17 @@
 	
 	<script type="text/javascript">
     $(function() {
+    	
+    	var index;
 
-        $("#id_table").datagrid({
+        $("#dg").datagrid({
+        	
+        	onAfterEdit:function(index,row,changes){
+            	console.log(index);
+            	console.log(row);
+            	console.log(changes);
+            	
+            },
             // 定义表头列,重点属性       
             columns: [[{
                 checkbox: true,
@@ -21,15 +30,30 @@
             }, {
                 field: 'id',
                 title: 'ID',
-                id: 'id'
+                id: 'id',
+                editor : {
+					type : 'numberbox',// 输入框的数据格式
+					options : {}
+				}
+
             }, {
                 field: 'name',
                 title: '姓名',
-                id: 'name'
+                id: 'name',
+                editor : {
+					type : 'text',// 输入框的数据格式
+					options : {}
+				}
+
             }, {
                 field: 'age',
                 title: '年龄',
-                id: 'age'
+                id: 'age',
+                editor : {
+					type : 'numberbox',// 输入框的数据格式
+					options : {}
+				}
+
             }, ]],
             // 定义请求地址,重点属性          
             url: '../data/datagrid.json',
@@ -37,14 +61,58 @@
             rownumbers: true,
             // 是否单选
             singleSelect: true,
+            
             // 指定工具栏,重点属性
             toolbar: [{
-                iconCls: 'icon-edit',
-                text: '编辑',
+                iconCls: 'icon-add',
+                text: '添加',
                 handler: function() {
-                    alert('编辑按钮')
+                    $('#dg').datagrid('insertRow',{
+                    	index:0, //索引从0开始
+                    	row:{}  //// 指定插入的行中的数据.如果不写就代表是空行
+                    });
+                 // 让表格处于编辑的状态, 第二个参数就是行的索引
+                 $("#dg").datagrid('beginEdit',0)
                 }
             }, "-", {
+                iconCls: 'icon-edit',
+                text: '修改',
+                handler: function() {
+                	var rows = $('#dg').datagrid('getSelections')
+					if (rows.length == 1) {
+
+						index = $('#dg').datagrid('getRowIndex', rows[0])
+
+						// 让表格处于编辑的状态, 第二个参数就是行的索引
+						$('#dg').datagrid('beginEdit', index)
+					} else {
+						$.messager.alert("提示", "您只能选择一行进行操作", "warning")
+					}
+                }
+            }, "-",{
+                iconCls: 'icon-remove',
+                text: '删除',
+                handler: function() {
+                	var rows = $('#dg').datagrid('getSelections')
+                	
+                	if (rows.length == 1) {
+
+						index = $('#dg').datagrid('getRowIndex', rows[0])
+
+						// 删除行, 第二个参数就是行的索引
+
+                	$("#dg").datagrid('deleteRow',index)
+                	}else{
+                		$.messager.alert("提示", "您只能选择一行进行操作", "warning")
+                	}
+                }
+            }, "-",{
+                iconCls: 'icon-save',
+                text: '保存',
+                handler: function() {
+                	$("#dg").datagrid('endEdit',0)
+                }
+            }, "-",{
                 iconCls: 'icon-help',
                 text: '帮助',
                 // 指定点击菜单时的响应函数
@@ -63,7 +131,7 @@
 	
 </head>
 <body>
-<table id="id_table" class="easyui-datagrid" >
+<table id="dg" class="easyui-datagrid" >
     <thead>
         <tr>
             <th data-options="field:'id'">Id</th>
