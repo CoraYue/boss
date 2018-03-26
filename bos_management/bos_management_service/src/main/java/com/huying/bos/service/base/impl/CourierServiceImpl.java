@@ -1,6 +1,7 @@
 package com.huying.bos.service.base.impl;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,6 +32,8 @@ public class CourierServiceImpl implements CourierService{
 		
 	}
 
+	//批量删除
+	@RequiresPermissions("batchDel")
 	@Override
 	public void batchDel(String ids) {
 		//为空判断

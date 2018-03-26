@@ -26,7 +26,10 @@ public class UserRealm extends AuthorizingRealm{
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		SimpleAuthorizationInfo info=new  SimpleAuthorizationInfo();
+		//授权
 		info.addStringPermission("courierAction_pageQuery");
+		//授予角色
+		info.addRole("admin");
 		return info;
 	}
 

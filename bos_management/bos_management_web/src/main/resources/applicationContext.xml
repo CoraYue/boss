@@ -66,8 +66,28 @@
 	-->
 	<context:component-scan base-package="com.huying.bos.service,com.huying.bos.web" />
 
-	<!-- 开启事务注解 -->
-	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- 开启事务注解 
+	proxy-target-class="true" 使用cglib代理
+	proxy-target-class="false" 使用jdk代理
+	-->
+	<tx:annotation-driven proxy-target-class="true"  transaction-manager="transactionManager" />
+	<!--基于spring的动自动代理  创建service层的实现-->
+	<bean
+		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator">
+		<!-- 开启cglib代理 -->
+		<property name="proxyTargetClass" value="true"></property>
+	</bean>
+	<!--
+		配置切面 = 切点 + 通知
+		切点 : 向那里插入代码
+		通知 : 要插入的代码
+	-->
+<bean
+		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager"></property>
+	</bean>
+
+	
 	<!--
 		#########################################################
 		指定Spring Data JPA要进行扫描的包,该包中的类框架会自动为其创建代理
@@ -100,7 +120,7 @@
 	<property name="loginUrl" value="/login.html" />
 	<!-- 指定权限验证成功后,跳转页面 -->
 	<property name="successUrl" value="/index.html" />
-	<!-- 指定权限不足页面 -->
+	<!-- 指定权限不足页面 只对拦截器生效-->
 	<property name="unauthorizedUrl" value="/unauthorized.html" />
 	<!-- 指定URL拦截规则 -->
 	<!--
