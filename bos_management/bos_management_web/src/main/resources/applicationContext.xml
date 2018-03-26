@@ -118,7 +118,8 @@
 				/validatecode.jsp* = anon
 				 
 				/userAction_login.action = anon
-				/userAction_fun.action = anon
+				<!-- 新增快递员权限 -->
+				/courierAction_pageQuery.action = perms["courierAction_pageQuery"]
 				/** = authc   
 		</value>
 	</property>
