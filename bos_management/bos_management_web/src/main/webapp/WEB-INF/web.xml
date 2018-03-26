@@ -12,7 +12,8 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
-<!-- 增加配置 -->
+
+	<!-- 增加配置 -->
 	<!-- 配置CXF的Servlet -->
 	<servlet>
 		<servlet-name>cxf</servlet-name>
@@ -22,11 +23,7 @@
 		<servlet-name>cxf</servlet-name>
 		<url-pattern>/webService/*</url-pattern>
 	</servlet-mapping>
-	<!-- 修改配置. 如果不修改,会导致Struts框架和cxf框架起冲突 -->
-	<filter-mapping>
-		<filter-name>struts</filter-name>
-		<url-pattern>*.action</url-pattern>
-	</filter-mapping>
+
 
 	<!-- 指定Spring框架配置文件的位置 -->
 	<context-param>
@@ -37,6 +34,26 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+
+
+	<!-- 配置Spring框架提供的过滤器,用于整合shiro框架 -->
+	<!-- 该过滤器必须在Struts过滤器之前 -->
+	<!-- 指定的filter-name,必须在spring框架配置文件中有声明
+		即注册bean时声明的id一定要和filter-name中声明的值保持一致
+	-->
+	<!-- Tomcat启动时,会调用这个过滤器的初始化方法
+		此时会从Sping工厂中获取id为filter-name的bean,
+		如果spring框架配置文件没有注册这个bean,将导致NoSuchBeanDefinitionException -->
+	<filter>
+		<filter-name>shirofilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>shirofilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+
 	<!-- 配置Struts的前端控制器 -->
 	<filter>
 		<filter-name>struts</filter-name>
@@ -47,7 +64,11 @@
 		<url-pattern>*.action</url-pattern>
 	</filter-mapping>
 
-	
-
-
 </web-app>
+
+
+
+
+
+
+

@@ -89,5 +89,45 @@
 		</jaxrs:outInterceptors>
 	</jaxrs:server>
 
+<!-- 注册shiro框架的过滤器
+	id一定要和web.xml中声明的DelegatingFilterProxy过滤器名字一致
+-->
+<bean id="shirofilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+	<!-- 注入shiro框架核心对象,安全管理器 -->
+	<property name="securityManager" ref="securityManager" />
+	
+	<!-- 指定要验证的页面 -->
+	<property name="loginUrl" value="/login.html" />
+	<!-- 指定权限验证成功后,跳转页面 -->
+	<property name="successUrl" value="/index.html" />
+	<!-- 指定权限不足页面 -->
+	<property name="unauthorizedUrl" value="/unauthorized.html" />
+	<!-- 指定URL拦截规则 -->
+	<!--
+		authc:代表shiro框架提供的一个过滤器，这个过滤器用于判断当前用户是否已经完成认证，
+		如果当前用户已经认证，就放行
+		如果当前用户没有认证，跳转到登录页面
+		anon:代表shiro框架提供的一个过滤器，允许匿名访问
+	-->
+	<property name="filterChainDefinitions">
+		<value>
+			   /css/* = anon
+				/data/* = anon
+				/images/* = anon
+				/js/** = anon
+				/validatecode.jsp* = anon
+				 
+				/userAction_login.action = anon
+				/userAction_fun.action = anon
+				/** = authc   
+		</value>
+	</property>
+</bean>
+<!-- 注册安全管理器 -->
+<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+<!--注入realm  -->
+  <property name="realm" ref="userRealm"></property>
+</bean>
+
 
 </beans>
