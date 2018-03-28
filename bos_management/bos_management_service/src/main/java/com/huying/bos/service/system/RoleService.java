@@ -9,4 +9,6 @@ public interface RoleService {
 
 	Page<Role> pageQuery(Pageable pageable);
 
+	void save(Role model, String menuIds, Long[] permissionIds);
+
 }
