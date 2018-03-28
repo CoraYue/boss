@@ -18,7 +18,10 @@
 			$(function(){
 				// 点击保存
 				$('#save').click(function(){
-					location.href='permission.html';
+					
+					if ($("#functionForm").form("validate")) {
+						$("#functionForm").submit()
+					}
 				});
 			});
 		</script>
@@ -27,11 +30,11 @@
 	<body class="easyui-layout">
 		<div data-options="region:'north'">
 			<div class="datagrid-toolbar">
-				<a id="save" icon="icon-save" href="#" class="easyui-linkbutton" plain="true">保存</a>
+				<a id="save" icon="icon-save"class="easyui-linkbutton" plain="true">保存</a>
 			</div>
 		</div>
 		<div data-options="region:'center'">
-			<form id="functionForm" method="post">
+			<form id="functionForm" method="post" action="../../permissionAction_save.action">
 				<table class="table-edit" width="80%" align="center">
 					<tr class="title">
 						<td colspan="2">权限信息</td>
