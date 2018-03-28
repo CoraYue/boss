@@ -36,21 +36,7 @@ public class UserAction extends CommonAction<User>{
 	}
 	
 	
-	/*
-	// userAction_login
-	@Action(value="userAction_login",results= 
-		{@Result(name="success",location="/index.html",type = "redirect")
-	, @Result(name="login",location="/login.html",type = "redirect")})
-	public String login() {
-		
-		//先获取服务器的验证码
-		
-	}
-	
-	
-	*/
-	
-	
+	//用户登录
 	@Action(value="userAction_login",results= 
 		{@Result(name="success",location="/index.html",type = "redirect")
 	, @Result(name="login",location="/login.html",type = "redirect")})
@@ -94,7 +80,19 @@ public class UserAction extends CommonAction<User>{
 		
 	}
 
-	
+	/**
+	 * 退出登录
+	 */
+	@Action(value="userAction_logout",results= {@Result(name="success",location="/login.html",type="redirect")})
+	public String logout() {
+		
+		//获取当前用户
+		Subject subject = SecurityUtils.getSubject();
+		subject.logout();
+		//清空session
+		ServletActionContext.getRequest().getSession().removeAttribute("user");
+		return SUCCESS;
+	}
 	
 	
 }
