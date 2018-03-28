@@ -36,12 +36,12 @@
 			var frozenColumns = [ [ {
 				field : 'id',
 				checkbox : true,
-				rowspan : 2
+				
 			}, {
 				field : 'username',
 				title : '名称',
 				width : 80,
-				rowspan : 2
+				
 			} ] ];
 		
 		
@@ -130,6 +130,10 @@
 				$('#grid').datagrid('reload');
 				$('#grid').datagrid('uncheckAll');
 			}
+			
+		
+
+			
 		</script>
 	</head>
 
@@ -137,6 +141,7 @@
 		<div region="center" border="false">
 			<table id="grid"></table>
 		</div>
+		
 	</body>
 
 </html>

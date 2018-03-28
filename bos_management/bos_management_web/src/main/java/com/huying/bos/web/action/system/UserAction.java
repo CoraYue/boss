@@ -13,10 +13,12 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.huying.bos.domain.system.User;
+import com.huying.bos.service.system.UserService;
 import com.huying.bos.web.action.CommonAction;
 
 @Controller
@@ -28,6 +30,10 @@ public class UserAction extends CommonAction<User>{
 	public UserAction( ) {
 		super(User.class);
 	}
+	
+	@Autowired
+	private UserService userService;
+	
 
 	//使用属性驱动获得客户输入的验证码
 	private String checkCode;
@@ -93,6 +99,21 @@ public class UserAction extends CommonAction<User>{
 		ServletActionContext.getRequest().getSession().removeAttribute("user");
 		return SUCCESS;
 	}
+	
+	//属性驱动获取角色id
+	private long[] roleIds;
+	public void setRoleIds(long[] roleIds) {
+		this.roleIds = roleIds;
+	}
+	
+	//保存用户
+	@Action(value="userAction_save",results= {@Result(name="success",location="/pages/system/userlist.html",type="redirect")})
+	public String save() {
+		
+		userService.save(getModel(),roleIds);
+		return SUCCESS;
+	}
+	
 	
 	
 }

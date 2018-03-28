@@ -1,6 +1,7 @@
 package com.huying.bos.web.action.system;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -68,5 +69,18 @@ public class RoleAction extends CommonAction<Role>{
 		roleService.save(getModel(),menuIds,permissionIds);
 		return SUCCESS;
 	}
+	
+	@Action("roleAction_findAll")
+	public String findAll() throws IOException {
+		// 进行分页查询
+				Page<Role> page =  roleService.pageQuery(null);
 
+				// 忽略字段
+				JsonConfig config = new JsonConfig();
+				config.setExcludes(new String[] { "users","permissions","menus" });
+				
+				List<Role> list = page.getContent();
+				list2json(list, config);
+				return NONE;
+			}
 }
