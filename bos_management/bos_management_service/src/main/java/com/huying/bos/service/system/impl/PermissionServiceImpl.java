@@ -7,13 +7,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.huying.bos.dao.system.PermissionRepository;
-import com.huying.bos.domain.system.Menu;
 import com.huying.bos.domain.system.Permission;
 import com.huying.bos.service.system.PermissionService;
 
 @Service
 @Transactional
-public class PermissionServiceImpl implements PermissionService{
+public  class PermissionServiceImpl implements PermissionService{
 
 	@Autowired
 	private PermissionRepository permissionRepository;
@@ -29,5 +28,9 @@ public class PermissionServiceImpl implements PermissionService{
 		permissionRepository.save(model);
 		
 	}
+
+	
+
+
 
 }

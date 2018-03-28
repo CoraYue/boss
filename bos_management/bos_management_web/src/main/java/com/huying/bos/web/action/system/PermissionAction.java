@@ -1,6 +1,7 @@
 package com.huying.bos.web.action.system;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -13,7 +14,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 
-import com.huying.bos.domain.system.Menu;
 import com.huying.bos.domain.system.Permission;
 import com.huying.bos.service.system.PermissionService;
 import com.huying.bos.web.action.CommonAction;
@@ -37,7 +37,7 @@ public class PermissionAction extends CommonAction<Permission> {
 	@Action("permissionAction_pageQuery")
 	public String pageQuery() throws IOException {
 
-		// Struts框架在封装数据的时候会优先封装给模型对象,会导致属性驱动中的page对象无法获取数据
+		
 		Pageable pageable = new PageRequest(page - 1, rows);
 
 		// 进行分页查询
@@ -57,6 +57,22 @@ public class PermissionAction extends CommonAction<Permission> {
 		permissionService.save(getModel());
 		return SUCCESS;
 
+	}
+	
+	//查询所有权限
+	@Action(value="permissionAction_findAll")
+	public String findAll() throws IOException {
+		
+		
+		// 进行分页查询
+		Page<Permission> page = permissionService.pageQuery(null);
+		List<Permission> list = page.getContent();
+
+		// 忽略字段
+		JsonConfig config = new JsonConfig();
+		config.setExcludes(new String[] { "roles" });
+		list2json(list, config);
+		return NONE;
 	}
 
 }

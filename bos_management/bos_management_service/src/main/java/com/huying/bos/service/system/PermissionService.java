@@ -11,4 +11,6 @@ public interface PermissionService {
 
 	void save(Permission model);
 
+
+	
 }
