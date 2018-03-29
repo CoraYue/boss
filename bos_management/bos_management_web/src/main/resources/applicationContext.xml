@@ -174,7 +174,7 @@
 		<!-- 指定触发的规则.闹钟在什么时候响起 -->
 		<property name="cronExpression">
 			<!-- 每隔五秒钟执行一次 -->
-			<value>0/5 * * * * ?</value>
+			<value>0 15 10 L * ?</value>
 		</property>
 		<!-- 注入任务详情,闹钟响起的时候要做什么事情 -->
 		<property name="jobDetail" ref="jobDetail"></property>
