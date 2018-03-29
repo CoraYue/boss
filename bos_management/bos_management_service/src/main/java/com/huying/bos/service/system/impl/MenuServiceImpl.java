@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.huying.bos.dao.system.MenuRepository;
 import com.huying.bos.domain.base.FixedArea;
 import com.huying.bos.domain.system.Menu;
+import com.huying.bos.domain.system.User;
 import com.huying.bos.service.system.MenuService;
 
 @Service
@@ -40,6 +41,14 @@ public class MenuServiceImpl implements MenuService{
 	@Override
 	public Page<Menu> pageQuery(Pageable pageable) {
 		return menuRepository.findAll(pageable);
+	}
+
+	@Override
+	public List<Menu> findbyUser(User user) {
+		if("admin".equals(user.getUsername())) {
+			return menuRepository.findAll();
+		}
+		return menuRepository.findbyUser(user.getId());
 	}
 
 }

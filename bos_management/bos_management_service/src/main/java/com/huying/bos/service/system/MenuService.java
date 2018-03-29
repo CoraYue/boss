@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.huying.bos.domain.system.Menu;
+import com.huying.bos.domain.system.User;
 
 public interface MenuService {
 
@@ -14,5 +15,7 @@ public interface MenuService {
 	void save(Menu model);
 
 	Page<Menu> pageQuery(Pageable pageable);
+
+	List<Menu> findbyUser(User user);
 
 }
