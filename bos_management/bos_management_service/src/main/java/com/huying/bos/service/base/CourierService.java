@@ -16,6 +16,8 @@ public interface CourierService {
 
 	Page<Courier> pageQuery(Specification<Courier> specification, Pageable pageable);
 
+	void rest(String ids);
+
 	
 
 }

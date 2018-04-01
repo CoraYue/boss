@@ -32,6 +32,28 @@
 				//发送一个请求，查询数据，拼装文件
 				window.location.href="../../areaAction_exportExcel.action"
 			}
+			function doExportCharts() {
+				// 打开窗口
+				$('#chartWindow').window("open")
+				// 按照省份进行统计区域数据 [[]]  List<Object[]>
+				//发起请求查询数据
+				$.post("../../areaAction_exportCharts.action", function(data) {
+					// 加载HighCharts
+					$('#container').highcharts({
+
+						title : {
+							text : '各省区域数据占比'
+						},
+
+						series : [ {
+							type : 'pie',
+							name : '各省区域数据占比',
+							data : data
+						} ]
+					});
+				})
+
+			}
 			
 			//工具栏
 			var toolbar = [ {
@@ -58,6 +80,12 @@
 				text : '导出',
 				iconCls : 'icon-redo',
 				handler:doExportExcel
+			}, {
+				id : 'button-export',
+				text : '导出图表',
+				iconCls : 'icon-redo',
+				handler:doExportCharts
+				
 			}];
 			// 定义列
 			var columns = [ [ {

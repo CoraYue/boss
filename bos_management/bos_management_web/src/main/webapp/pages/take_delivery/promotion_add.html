@@ -23,23 +23,40 @@
 				//初始化控件
 				KindEditor.ready(function(K) {
 					window.editor = K.create('#description',{
+						//指定处理文件上传的Action地址
+						uploadJson:"../../imageAction_upload.action",
 						
-						uploadJson:"../../imageAction_upload.action"
+						//指定处理图片空间的Action地址
+						fileManagerJson :"../../imageAction_manager.action",
+						
+						//开启图片空间
+						allowFileManager:true
 					});
 				});
 
 			});
+			function submitData() {
+				// kindeditor插件初始化的时候创建了一个新的textarea
+				// 用户输入的内容并不在原来的textarea中
+				// 所以调用下面的代码后把新的textarea中的内容同步到原来的textarea中
+				if ($("#promotionForm").form("validate")) {
+			// 把写在kindeditor中的内容同步到textarea节点中
+			window.editor.sync();
+			$("#promotionForm").submit();
+		}
+
+			}
 		</script>
 	</head>
 	<body class="easyui-layout" style="visibility:hidden;">
 		<div region="north" style="height:31px;overflow:hidden;" split="false" border="false">
 			<div class="datagrid-toolbar">
-				<a id="save" icon="icon-save" href="#" class="easyui-linkbutton" plain="true">保存</a>
+				<a id="save" icon="icon-save" href="#" class="easyui-linkbutton" plain="true" onclick="submitData()">保存</a>
 				<a id="back" icon="icon-back" href="#" class="easyui-linkbutton" plain="true">返回列表</a>
 			</div>
 		</div>
 		<div region="center" style="overflow:auto;padding:5px;" border="false">
-			<form id="promotionForm" method="post">
+			<form id="promotionForm" method="post" action="../../promotionAction_save.action" enctype="multipart/form-data">
 				<table class="table-edit" width="95%" align="center">
 					<tr class="title">
 						<td colspan="4">宣传任务</td>

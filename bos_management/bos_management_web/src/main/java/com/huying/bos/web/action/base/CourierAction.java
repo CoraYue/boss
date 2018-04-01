@@ -179,5 +179,13 @@ public class CourierAction extends CommonAction<Courier> {
 		list2json(list, config);
 		return NONE;
 	}
+	
+	//还原快递员
+	@Action(value="courierAction_rest" ,results = {
+			@Result(name = "success", location = "/pages/base/courier.html", type = "redirect") })
+	public String rest() {
+		courierService.rest(ids);
+		return SUCCESS;
+	}
 
 }

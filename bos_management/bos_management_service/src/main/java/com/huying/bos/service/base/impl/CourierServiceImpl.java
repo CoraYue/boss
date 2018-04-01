@@ -53,6 +53,19 @@ public class CourierServiceImpl implements CourierService{
 		
 	}
 
+	//还原快递员
+	@Override
+	public void rest(String ids) {
+		//为空判断
+				if(StringUtils.isNotEmpty(ids)) {
+					//切割数据
+					String[] split = ids.split(",");
+					for (String id : split) {
+						courierRepository.updateDelTagByIds(Long.parseLong(id));
+					}
+				}
+	}
+
 	
 
 }

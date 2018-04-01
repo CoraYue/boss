@@ -40,7 +40,8 @@ public class UserRealm extends AuthorizingRealm{
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		SimpleAuthorizationInfo info=new  SimpleAuthorizationInfo();
-		
+		info.addStringPermission("courierAction_pageQuery");
+		info.addStringPermission("batchDel");
 		//需要根据当前的用户去查看对应的权限和角色
 		Subject subject = SecurityUtils.getSubject();
 		User user = (User) subject.getPrincipal();
@@ -67,7 +68,6 @@ public class UserRealm extends AuthorizingRealm{
 				info.addStringPermission(permission.getKeyword());
 			}
 		}
-		
 		
 		return info;
 	}
