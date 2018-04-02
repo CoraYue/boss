@@ -115,9 +115,21 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 			//存储验证码
 		redisTemplate.opsForValue().set(model.getTelephone(), activeCode, 1, TimeUnit.DAYS);
 			
-			String emailBody="感谢您激活本网站，请在24小时内点击链接<a href='http://localhost:8280/portal/customerAction_active.action?activeCode="+activeCode+"&telephone="+model.getTelephone()+"'>点此激活</a>完成激活";
+			final String emailBody="感谢您激活本网站，请在24小时内点击链接<a href='http://localhost:8280/portal/customerAction_active.action?activeCode="+activeCode+"&telephone="+model.getTelephone()+"'>点此激活</a>完成激活";
 			//发送激活邮件
-			MailUtils.sendMail(model.getEmail(), "激活邮件", emailBody);
+			//MailUtils.sendMail(model.getEmail(), "激活邮件", emailBody);
+			
+			jmsTemplate.send("mail", new MessageCreator() {
+				
+				@Override
+				public Message createMessage(Session session) throws JMSException {
+					MapMessage message=session.createMapMessage();
+					message.setString("mail", model.getEmail());
+					message.setString("title", "激活邮件");
+					message.setString("emailBody", emailBody);
+					return message;
+				}
+			});
 			
 			return SUCCESS;
 		}

@@ -15,4 +15,6 @@ public interface AreaService {
 
 	List<Area> finsByQ(String q);
 
+	List<Object[]> exportCharts();
+
 }

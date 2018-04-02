@@ -14,6 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.huying.bos.domain.base.SubArea;
+import com.sun.xml.txw2.output.SaxSerializer;
 
 
 
@@ -23,7 +24,7 @@ import com.huying.bos.domain.base.SubArea;
  */
 @Entity
 @Table(name = "T_ARCHIVE")
-public class Archive {
+public class Archive{
     @Id
     @GeneratedValue
     @Column(name = "C_ID")

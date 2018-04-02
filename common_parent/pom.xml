@@ -1,12 +1,13 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.huying</groupId>
-  <artifactId>common_parent</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <description>父工程</description>
-  
-  <properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.huying</groupId>
+	<artifactId>common_parent</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<description>父工程</description>
+
+	<properties>
 		<spring.version>4.2.4.RELEASE</spring.version>
 		<struts2.version>2.3.24</struts2.version>
 		<hibernate.version>5.0.7.Final</hibernate.version>
@@ -146,7 +147,7 @@
 
 		<!-- oracle数据库驱动，需要手动安装 -->
 		<dependency>
-			<groupId>com.oracle</groupId>
+			<groupId>com.Oracle</groupId>
 			<artifactId>ojdbc14</artifactId>
 			<version>10.2.0.2.0</version>
 		</dependency>
@@ -292,9 +293,9 @@
 			<version>2.1.7</version>
 		</dependency>
 		<dependency>
-			<groupId>com.itextpdf</groupId>
-			<artifactId>itext-asian</artifactId>
-			<version>5.2.0</version>
+			<groupId>com.alpha</groupId>
+			<artifactId>iTextAsain</artifactId>
+			<version>10.2.0.2.0</version>
 		</dependency>
 
 		<!-- groovy -->
@@ -316,7 +317,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-	<dependency>
+		<dependency>
 			<groupId>com.aliyun</groupId>
 			<artifactId>aliyun-java-sdk-core</artifactId>
 			<version>3.3.1</version>

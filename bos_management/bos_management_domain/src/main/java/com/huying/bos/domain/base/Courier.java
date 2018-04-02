@@ -1,5 +1,6 @@
 package com.huying.bos.domain.base;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,7 +18,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "T_COURIER")
-public class Courier {
+public class Courier implements Serializable{
 
     @Id
     @GeneratedValue

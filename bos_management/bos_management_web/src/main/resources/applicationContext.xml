@@ -131,17 +131,17 @@
 	-->
 	<property name="filterChainDefinitions">
 		<value>
-			   /css/* = anon
+			  <!--  /css/* = anon
 				/data/* = anon
 				/images/* = anon
 				/js/** = anon
 				/validatecode.jsp* = anon
 				 /demo/**=anon
 				/userAction_login.action = anon
-				<!-- 新增快递员权限 -->
+				新增快递员权限
 				/courierAction_pageQuery.action = perms["courierAction_pageQuery"]
 				/courierAction_batchDel.action = perms["batchDel"]
-				/** = authc   
+				/** = authc    -->
 		</value>
 	</property>
 </bean>
