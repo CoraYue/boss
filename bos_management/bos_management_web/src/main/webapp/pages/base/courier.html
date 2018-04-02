@@ -40,12 +40,23 @@
 					}
 			}
 			
-			function doDelete(){
+			function doDelete(){ 
 				
 				var rows= $("#grid").datagrid("getSelections")
 				if (rows.length == 0) {
 					$.messager.alert("提示","请至少选择一条数据进行操作","info")
 				}else {
+					
+				
+					for (var i = 0; i < rows.length; i++) {
+						if (rows[i].deltag == "1") {
+							$.messager.alert("提示","不能二次作废快递员","info");
+							return;
+						}
+					}
+						
+					
+					
 					$.messager.confirm('消息', '确定要作废快递员吗?', function(r){
 						
 						//创建一个数组
@@ -68,6 +79,16 @@
 				if (rows.length == 0) {
 					$.messager.alert("提示","请至少选择一条数据进行操作","info")
 				}else {
+					
+
+					for (var i = 0; i < rows.length; i++) {
+						if (rows[i].deltag == "") {
+							$.messager.alert("提示","不能二次还原快递员","info");
+							return;
+						}
+					}
+					
+					
 					$.messager.confirm('消息', '确定要还原快递员吗?', function(r){
 						
 						//创建一个数组
